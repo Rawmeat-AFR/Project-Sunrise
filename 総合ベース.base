@@ -1,0 +1,35 @@
+summaries:
+  Unique: values.unique().length
+  Filled: values.filter(!value.isType("null")).length
+filters:
+  and:
+    - file.folder != "Templates"
+    - file.basename != "総合ベース"
+    - '!file.tags.containsAny("メタ")'
+properties:
+  note.status:
+    displayName: ステータス
+  note.tags:
+    displayName: タグ
+  note.created:
+    displayName: 作成日
+  note.importance:
+    displayName: 重要度
+views:
+  - type: table
+    name: Table
+    order:
+      - file.name
+      - status
+      - tags
+      - created
+      - importance
+      - file.mtime
+    sort:
+      - property: tags
+        direction: ASC
+      - property: created
+        direction: DESC
+      - property: status
+        direction: ASC
+    summaries: {}
